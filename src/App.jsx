@@ -16,10 +16,11 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/garage" element={<Garage />} />
       <Route path="/testride" element={<Testride />} />
-      <Route path="/sign-in" element={<Signin />} />
 
 
       </Route>
+      <Route path="/sign-in" element={<Signin />} />
+
 
     </Routes>
     </>

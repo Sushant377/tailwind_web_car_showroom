@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { API_URL } from "../../config/environmentVariables";
 
 function Garage() {
   // State to hold the fetched data
@@ -9,7 +10,7 @@ function Garage() {
   async function test() {
     try {
       // Fetch data from the API
-      let response = await axios.get("http://localhost:5002/msg")
+      let response = await axios.get(`${API_URL}/msg`)
       // Log the fetched data to the console
       console.log(response.data);
       // Update the state with the fetched data
@@ -24,7 +25,7 @@ function Garage() {
   async function new_msg_api() {
     try {
       // Fetch data from the API
-      let a = await axios.get("http://localhost:5002/newmsg")
+      let a = await axios.get(`${API_URL}/newmsg`)
       // Log the fetched data to the console
       console.log(a.data);
       // Update the state with the fetched data
