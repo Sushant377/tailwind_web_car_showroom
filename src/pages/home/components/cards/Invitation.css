@@ -1,0 +1,25 @@
+/* .name{
+background-image: url(./card.png);
+background-repeat: no-repeat;
+height: 1100px;
+}  */
+.invit{
+    text-align: center;
+   width: 60vw;
+   height: 200vh;
+   color: white;
+    margin-top: 20px;
+    background-color: rgb(218, 8, 8);
+   border: 2px solid black;
+   border-radius: 5px;
+ }
+ .img1{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 150px;
+ }
+ .cont{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 150px;
+ }
