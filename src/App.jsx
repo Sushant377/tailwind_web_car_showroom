@@ -5,6 +5,13 @@ import Garage from './pages/garage/Garage';
 import Contact from './pages/contact/Contact';
 import Layout from './components/layout/Layout';
 import Signin from './pages/sign-in/Sign-in';
+import Login from './pages/login/Login';
+import Protected from './components/Protected';
+import Admin from './pages/admin/Admin_dashboard';
+import Dashboard from './pages/admin/Users';
+import Setting from './pages/admin/Setting';
+import Users from './pages/admin/Users';
+import Products from './pages/admin/Products';
 
 function App() {
   return (
@@ -19,7 +26,18 @@ function App() {
 
 
       </Route>
+      <Route path="/login" element={<Login/>} />
+
       <Route path="/sign-in" element={<Signin />} />
+      <Route path="/admin" element={<Protected />}>
+       <Route index element={<Admin/>} />
+       <Route path="/admin" element={< Dashboard/>} />
+       <Route path="setting" element={< Setting/>} />
+       <Route path="users" element={< Users/>} />
+       <Route path="products" element={< Products/>} />
+
+        </Route> 
+
 
 
     </Routes>

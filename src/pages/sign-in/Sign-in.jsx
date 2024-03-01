@@ -1,96 +1,59 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
+import axios from "axios";
+import { useState } from "react"
+import {  useNavigate } from "react-router-dom";
+
+function Signin() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [error, setError] = useState("");
+  const [loginsuccessmsg, setLoginsuccessmsg] = useState("");
+  const navigate = useNavigate();
+
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    if (password !== passwordConfirm) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:5002/signup",
+        data: { username, password },
+      });
+      setError("");
+      setLoginsuccessmsg(response.data);
+      navigate("/admin");
+    } catch (err) {
+      console.log(err.response.data);
+      setError(err.response.data);
+      setLoginsuccessmsg("");
+    }
   }
-  ```
-*/
-export default function Signin() {
-    return (
-      <>
-        {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
-            </h2>
-          </div>
-  
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-  
-              <div>
-                <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                    Password
-                  </label>
-                  <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                      Forgot password?
-                    </a>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-  
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Sign in
-                </button>
-              </div>
-            </form>
-  
-            <p className="mt-10 text-center text-sm text-gray-500">
-              Not a member?{' '}
-              <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                Start a 14 day free trial
-              </a>
-            </p>
-          </div>
-        </div>
-      </>
-    )
-  }
-  
+
+  return (
+    <div className="login_form">
+      <form onSubmit={onSubmit}>
+        <label htmlFor="username">
+          Username:
+          <input name="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <label htmlFor="password">
+          Password:
+          <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <label htmlFor="passwordConfirm">
+          Confirm Password:
+          <input name="passwordConfirm" type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} />
+        </label>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        {loginsuccessmsg && <div style={{ color: "green" }}>{loginsuccessmsg.msg}</div>}
+        <button type="submit" style={{ backgroundColor: "blue" }}>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default Signin;

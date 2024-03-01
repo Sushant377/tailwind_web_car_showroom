@@ -23,6 +23,7 @@ function Testride() {
     const data = await axios ({
       method : "post",
       url:"http://localhost:5002/posting",
+      data: {FormData:FormData  }
   
     });
     console.log(data);
@@ -179,9 +180,7 @@ function Testride() {
             </label>
           </div>
           <button
-            onClick={(e) => {
-              onClick(e);
-            }}
+            onClick={postp}
           >
             Submit
           </button>
