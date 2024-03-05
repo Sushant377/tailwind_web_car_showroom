@@ -20,7 +20,7 @@ function Navbar() {
             <span className="ml-3 text-xl">SuperCars Nepal</span>
           </a>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <NavLink to="/home" className="mr-5 hover:text-gray-900">
+            <NavLink to="/" className="mr-5 hover:text-gray-900">
               Home
             </NavLink>
             <NavLink to="/contact" className="mr-5 hover:text-gray-900">
@@ -33,7 +33,7 @@ function Navbar() {
               Test Ride
             </NavLink>
           </nav>
-          <NavLink to="/sign-in" className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+          <NavLink to="/sign-in" className="inline-flex items-center bg-gray-100 border-0 ml-3 mr-5 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
             Sign in
             <svg
               fill="none"
