@@ -14,33 +14,39 @@ import Users from "./pages/admin/Users";
 import Products from "./pages/admin/Products";
 import Dynamic from "./pages/dynamic/Dynamic";
 import Bmw from "./pages/garage/garage_sidenav/Bmw";
-import Ferrari from "./pages/garage/garage_sidenav/Ferrari";
-import Mercedes from "./pages/garage/garage_sidenav/Mercedes";
-import Lambo from "./pages/garage/garage_sidenav/Lambo";
-
+import GlobalContext from "./GlobalContext";
+import { useState } from "react";
+import Hookform from "./pages/hook_form/Hookform";
 function App() {
+  const [theme, setTheme]= useState({
+    backgroundColor:"#b37ec8",
+    color: "black"
+  })
+
   return (
-    <>
+    <> 
+    <GlobalContext.Provider value={{theme, setTheme}}>
       <Routes>
-        <Route path="" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="garage" element={<Garage />} />
-          <Route path="/garage/:id" element={
+          <Route path="/garage/:id" element={ 
           <Garage >
             <Bmw />
           </Garage>
-        }
-          />
-           
-          
+        } />  
+
           <Route path="/testride" element={<Testride />} />
           <Route path="/dynamic/:id" element={<Dynamic />} />
+          <Route path="/hookform" element={<Hookform />} />
+
         </Route>
 
         <Route path="/login" element={<Login />} />
 
         <Route path="/sign-in" element={<Signin />} />
+
         <Route path="/admin" element={<Protected />}>
           <Route index element={<Admin />} />
           <Route path="/admin" element={<Dashboard />} />
@@ -49,6 +55,7 @@ function App() {
           <Route path="products" element={<Products />} />
         </Route>
       </Routes>
+      </GlobalContext.Provider>
     </>
   );
 }

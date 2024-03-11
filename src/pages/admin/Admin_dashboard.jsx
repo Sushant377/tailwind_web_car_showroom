@@ -3,7 +3,7 @@
 export default function Admin() {
 
   return (
-<>
+<div className="">
  
    <div>
       <div className="  text-2xl font-bold mb-1"> <h2 >Dashboard</h2>
@@ -11,12 +11,12 @@ export default function Admin() {
 
       <section className="text-gray-600 body-font">
   <div className="container px-5  mx-auto flex flex-col">
-    <div className="lg:w-4/6 mx-auto">
+    <div className="lg:w-5/6 mx-auto">
       <div className="rounded-lg h-40 overflow-hidden">
         <img
           alt="content"
           className="object-cover object-center h-full w-full"
-          src="carcover.jpg"
+          src="carcover.png"
         />
       </div>
       <div className="flex flex-col sm:flex-row mt-10">
@@ -80,5 +80,5 @@ export default function Admin() {
 
       
     </div>
-   </>
+   </div>
 )}

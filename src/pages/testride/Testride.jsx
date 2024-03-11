@@ -4,16 +4,16 @@ import axios from "axios";
 
 
 function Testride() {
-  //   const [name, setName] = useState("");
-  //   const [email, setEmail] = useState("");
-  //   const [gender, setGender] = useState("");
-  //   const [country, setCountry] = useState("");
-  //   const [bike, setBike] = useState("");
-  //   const [nameError, setNameError] = useState("");
-  //   const [emailError, setEmailError] = useState("");
-  //   const [genderError, setGenderError] = useState("");
-  //   const [countryError, setCountryError] = useState("");
-  //   const [bikeError, setBikeError] = useState("");
+    // const [name, setName] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [gender, setGender] = useState("");
+    // const [country, setCountry] = useState("");
+    // const [bike, setBike] = useState("");
+    // const [nameError, setNameError] = useState("");
+    // const [emailError, setEmailError] = useState("");
+    // const [genderError, setGenderError] = useState("");
+    // const [countryError, setCountryError] = useState("");
+    // const [bikeError, setBikeError] = useState("");
 
 
 

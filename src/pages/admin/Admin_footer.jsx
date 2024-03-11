@@ -1,31 +1,26 @@
-import { useContext } from "react";
-import GlobalContext from "../../../GlobalContext";
 
-function Footer() {
-  const contextVlues =useContext(GlobalContext);
-  const {theme} = contextVlues;
-  const {backgroundColor , color} = theme;
+function Admin_footer() {
   return (
-    <div style={{color:color, backgroundColor:backgroundColor}}  >
-        <footer >
+    <div  >
+        <footer className="text-white body-font">
   <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-    <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-
-      <span className="ml-3 text-xl">SuperCars Nepal</span>
+    <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
+   
+      <span className="ml-3 text-xl ">Admin</span>
     </a>
-    <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-      © 2020 SUpercarsNepal —
+    <p className="text-sm text-white sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+      © 2024 Supercars —
       <a
         href="https://twitter.com/knyttneve"
-        className="text-gray-600 ml-1"
+        className="text-white ml-1"
         rel="noopener noreferrer"
         target="_blank"
       >
-        @np
+        @admin
       </a>
     </p>
     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-      <a className="text-gray-500">
+      <a className="text-white">
         <svg
           fill="currentColor"
           strokeLinecap="round"
@@ -37,7 +32,7 @@ function Footer() {
           <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
         </svg>
       </a>
-      <a className="ml-3 text-gray-500">
+      <a className="ml-3 text-white">
         <svg
           fill="currentColor"
           strokeLinecap="round"
@@ -49,7 +44,7 @@ function Footer() {
           <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
         </svg>
       </a>
-      <a className="ml-3 text-gray-500">
+      <a className="ml-3 text-white">
         <svg
           fill="none"
           stroke="currentColor"
@@ -63,7 +58,7 @@ function Footer() {
           <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
         </svg>
       </a>
-      <a className="ml-3 text-gray-500">
+      <a className="ml-3 text-white">
         <svg
           fill="currentColor"
           stroke="currentColor"
@@ -88,4 +83,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default Admin_footer

@@ -137,7 +137,7 @@ function Garage() {
         </nav>
       </div>
         <Outlet/> 
-        <div>
+        <div> 
         
         <div>{data.car}</div>
          <div>{data.color}</div>

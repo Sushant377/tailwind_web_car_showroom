@@ -2,7 +2,9 @@ import { Outlet } from "react-router-dom"
 import Navbar from "../navbar/Navbar"
 import Footer from "./footer/Footer"
 
+
 function Layout() {
+
   return (
     <>
     <div>
@@ -10,7 +12,7 @@ function Layout() {
     <Navbar/>
         <Outlet/>
     </div>
-    <div>
+    <div  >
         <Footer/>
     </div>
     </>
