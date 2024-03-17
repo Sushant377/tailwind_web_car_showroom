@@ -21,7 +21,7 @@ async function onSubmit(e) {
             data:{username , password},
         });
         console.log(response);
-        setError("");
+        setError("");   
         setLoginsuccessmsg(response.data);
         Cookies.set("token", response.data.token,{path:"/"})
         navigate("/admin");
@@ -30,7 +30,6 @@ async function onSubmit(e) {
         console.log(err.response.data)
         setError(err.response.data);
         setLoginsuccessmsg("");
-
     }
 }
   return (

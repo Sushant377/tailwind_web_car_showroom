@@ -1,26 +1,84 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import Spinner from '../../components/spinner/Spinner';
+import Example from '../../components/material_react_table/Reacttable';
+import Testingform from './Testingform';
 
-export default function App() {
+export default function Hookform() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [formData, setFormData] = useState("");
+  const [tableData, setTableData] = useState([]);
+  // const [prismaData, setPrismaData] = useState([]);
 
+
+const [loading, setLoading]= useState("");
   async function onSubmit(data) {
     try {
+      setLoading(true);
       const response = await axios({
         method: "post",
         url: "http://localhost:5002/hook_form",
-        data: data
+        data: data,
+        
       });
       console.log(response.data);
       setFormData(response.data);
     } catch (err) {
       console.log(err);
+    }finally{
+      setLoading(false);
     }
   }
+//trying another get req to load data from backend prisma
+
+
+// async   function prismafn() {
+//   try {
+//     const response = await axios({  
+//       method: "get",
+//       url: "http://localhost:5002/prisma",
+      
+//     });
+//     setPrismaData(response.data);
+//     console.log(response.data);
+
+//   } catch (err) {
+//     window.alert(err.message);
+//     console.log(err.message);
+//   }
+//   }
+//   useEffect(() => {
+//     prismafn();
+//   }, []);
+  
+
+
+//
+  async function tableDatas() {
+    try {
+      const response = await axios({  
+        method: "get",
+        url: "http://localhost:5002/tabledata",
+        
+      });
+      setTableData(response.data);
+      console.log(response.data);
+  
+    } catch (err) {
+      window.alert(err.message);
+      console.log(err.message);
+    }
+    }
+    useEffect(() => {
+      tableDatas();
+    }, []);
+    
+  
+
 
   return (
+    <>
     <div className="min-h-screen flex items-center justify-center bg-gray-400 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <form className="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
@@ -83,8 +141,8 @@ export default function App() {
             <label > I accept the Terms and Conditions</label></div>
 
           <div className="flex items-center justify-between">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-              Submit
+            <button disabled={loading} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+             <div className='flex items-center gap-3'> Submit {loading &&  <Spinner/>}</div>
             </button>
           </div>
         </form>
@@ -103,6 +161,53 @@ export default function App() {
           <p>No form data submitted yet.</p>
         )}
       </div>
+      <div className="bg-slate-500" >
+
+        
+   <table className="border-collapse">
+ 
+     <tr>
+      <th>Roll</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>GPA</th></tr>
+          
+       { tableData.map((value,index) => (
+        <tr key={index}>
+        <td>{value.Roll}</td>
+        <td>{value.Name}</td>
+        <td>{value.Address}</td>
+        <td>{value.GPA}</td>
+      </tr>
+          ))}
+
+
+   </table>
+         </div>
     </div>
+
+    {/* getting prisma data */}
+    {/* <div>      
+   <table className="border-collapse">
+ <tr>
+  <th>id</th>
+  <th>Name</th>
+  <th>Email</th>
+ </tr>
+      
+   { prismaData.map((value,index) => (
+    <tr key={index}>
+   <th>{value.id}</th>
+    <td>{value.name}</td>
+    <td>{value.email}</td>
+  </tr>
+      ))}
+</table></div> */}
+<Testingform/>
+    
+    <div  >
+      <Example/>
+    </div>
+    </>
   );
 }

@@ -17,6 +17,7 @@ import Bmw from "./pages/garage/garage_sidenav/Bmw";
 import GlobalContext from "./GlobalContext";
 import { useState } from "react";
 import Hookform from "./pages/hook_form/Hookform";
+import Example from "./components/material_react_table/Reacttable";
 function App() {
   const [theme, setTheme]= useState({
     backgroundColor:"#b37ec8",
@@ -54,6 +55,8 @@ function App() {
           <Route path="users" element={<Users />} />
           <Route path="products" element={<Products />} />
         </Route>
+        <Route path="/table" element={<Example />} />
+
       </Routes>
       </GlobalContext.Provider>
     </>
