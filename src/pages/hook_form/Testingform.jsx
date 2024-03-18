@@ -11,6 +11,8 @@ export default function Testingform() {
   const [isUpdate, setIsUpdate] = useState(false);
   const [updateId, setUpdateId] = useState(null);
 
+
+
   // Function to fetch data from backend
   async function prismafn() {
     try {
@@ -38,41 +40,42 @@ export default function Testingform() {
       setError(err.message);
     }
   };
-  
 
   // Function to handle user selection
-  const handleSelect = (user) => {
-    setValue("id", user.id); // Fill the form with selected user's ID
-    setValue("name", user.name); // Fill the form with selected user's name
-    setValue("email", user.email); // Fill the form with selected user's email
+  const handleSelect = (data) => {
+    setIsUpdate(true);
+    setUpdateId(data.id);
+    setValue("id", data.id); // Fill the form with selected user's ID
+    setValue("name", data.name); // Fill the form with selected user's name
+    setValue("email", data.email); // Fill the form with selected user's email
   };
 
-  // Function to handle user update
-  const handleUpdate = async () => {
-    try {
-      const id = watch("id"); // Get the user ID from the form
-      const response = await axios.put(
-        `http://localhost:5002/prisma/update/${id}`,
-        {
-          name: watch("name"),
-          email: watch("email"),
-        }
-      );
+  // // Function to handle user update
+  // const handleUpdate = async () => {
+  //   try {
+  //     const id = watch("id"); // Get the user ID from the form
+  //     const response = await axios.put(
+  //       `http://localhost:5002/prisma/update/${id}`,
+  //       {
+  //         name: watch("name"),
+  //         email: watch("email"),
+  //       }
+  //     );
 
-      if (response && response.data) {
-        prismafn(); // Refresh data after update
-        setError(null); // Clear error state
-        setUpdateMessage("Data updated successfully."); // Set update message
-      } else {
-        setError("Failed to update data."); // Set error message
-      }
-    } catch (err) {
-      console.log(err.response.data);
-      setError(err.response.data); // Set error message returned by backend
-    }
-  };
+  //     if (response && response.data) {
+  //       prismafn(); // Refresh data after update
+  //       setError(null); // Clear error state
+  //       setUpdateMessage("Data updated successfully."); // Set update message
+  //     } else {
+  //       setError("Failed to update data."); // Set error message
+  //     }
+  //   } catch (err) {
+  //     console.log(err.response.data);
+  //     setError(err.response.data); // Set error message returned by backend
+  //   }
+  // };
 
-  // Form submission handler
+  // Form  post submission handler
   const onSubmit = async (data) => {
     try {
       await axios.post("http://localhost:5002/prisma", {
@@ -86,36 +89,28 @@ export default function Testingform() {
       setError(err.response.data); // Set error message returned by backend
     }
   };
-
-  //update using another way which changes submit button to update on clicking select
-  async function updateData(data) {
-    console.log(data);
-    setUpdateId(data.id);
-    setIsUpdate(true);
-    setValue("name", data.name);
-    setValue("email", data.email);
+//new fn method for update button
+async function updateSubmission(data) {
+  console.log("update: ", data);
+  try {
+    const res = await axios({
+      method: "PUT",
+      url: `http://localhost:5002/prisma/update/${updateId}`,
+      data: { name: data.name, email: data.email },
+    });
+    prismafn();
+    console.log(res.data);
+  } catch (err) {
+    console.log(err);
   }
-  async function updateSubmission(data) {
-    console.log("update: ", data);
-    try{
-      const res = await axios({
-        method: "PUT",
-        url: `http://localhost:5000/prisma/${updateId}`,
-        data: { name: data.name, email: data.email },
-      });
-     prismafn();
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+}
 
   return (
     <div className="flex items-center">
       <div>
         <form
           className="flex flex-col bg-lime-400"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(isUpdate ? updateSubmission: onSubmit)}
         >
           <input
             type="text"
@@ -138,13 +133,18 @@ export default function Testingform() {
             {...register("email", { required: true })}
           />
           <div className="flex mt-2">
-            <input className="bg-green-600" type="submit" value="Submit" />
-            <button
-              className="bg-yellow-600 text-white px-3 py-1 rounded ml-2"
-              onClick={handleUpdate}
-            >
-              Update
-            </button>
+      {!isUpdate ? (<button type="submit"
+          className="bg-green-600 text-white px-3 py-1 rounded ml-2"
+        >
+              Submit      
+      </button>) :
+          
+        (<button
+          className="bg-yellow-600 text-white px-3 py-1 rounded ml-2"
+          onClick={updateSubmission}
+        >
+          Update
+        </button>)}
             {/* Update button */}
           </div>
           {error && <p className="text-red-600">{error.message || error}</p>}{" "}
@@ -153,6 +153,7 @@ export default function Testingform() {
             <p className="text-green-600">{updateMessage}</p>
           )}
           {/* Display update message if exists */}
+          
         </form>
       </div>
 
@@ -183,14 +184,14 @@ export default function Testingform() {
                       onClick={() => handleDelete(value.id)}
                     >
                       Delete
-                    </button>{" "}
+                    </button>
                     {/* Delete button */}
                     <button
                       className="bg-blue-600 text-white px-3 py-1 rounded ml-2"
                       onClick={() => handleSelect(value)}
                     >
                       Select
-                    </button>{" "}
+                    </button>
                     {/* Select button */}
                   </td>
                 </tr>

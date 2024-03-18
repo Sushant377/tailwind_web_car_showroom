@@ -42,6 +42,7 @@ function App() {
           <Route path="/dynamic/:id" element={<Dynamic />} />
           <Route path="/hookform" element={<Hookform />} />
 
+
         </Route>
 
         <Route path="/login" element={<Login />} />
