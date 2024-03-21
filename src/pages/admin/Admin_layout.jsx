@@ -10,7 +10,7 @@ function AdminLayout() {
 
   function logout() {
     Cookies.remove('token', { path: '/' });
-    navigate('/login');
+    navigate('/loginhook');
   }
 
   return (

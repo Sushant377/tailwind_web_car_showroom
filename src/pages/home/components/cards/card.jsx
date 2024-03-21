@@ -1,6 +1,12 @@
+import{motion} from "framer-motion";
 function Card() {
   return (
-    <div>
+    <motion.div
+    initial={{x:'100vw'}}
+    animate={{x:0}}
+    transition={{duration:3}}
+    whileHover={{scale:1.05}}
+>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
@@ -100,7 +106,7 @@ function Card() {
           </div>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 }
 

@@ -4,7 +4,6 @@ import Testride from "./pages/testride/Testride";
 import Garage from "./pages/garage/Garage";
 import Contact from "./pages/contact/Contact";
 import Layout from "./components/layout/Layout";
-import Signin from "./pages/sign-in/Sign-in";
 import Login from "./pages/login/Login";
 import Protected from "./components/Protected";
 import Admin from "./pages/admin/Admin_dashboard";
@@ -18,6 +17,9 @@ import GlobalContext from "./GlobalContext";
 import { useState } from "react";
 import Hookform from "./pages/hook_form/Hookform";
 import Example from "./components/material_react_table/Reacttable";
+import LoginHook from "./pages/login/LoginHookForm";
+import Signinhook from "./pages/sign-in/signinhook";
+import Signin from "./pages/sign-in/Sign-in";
 function App() {
   const [theme, setTheme]= useState({
     backgroundColor:"#b37ec8",
@@ -46,8 +48,12 @@ function App() {
         </Route>
 
         <Route path="/login" element={<Login />} />
+        <Route path="/loginhook" element={<LoginHook />} />
 
+
+        <Route path="/signinhook" element={<Signinhook />} />
         <Route path="/sign-in" element={<Signin />} />
+
 
         <Route path="/admin" element={<Protected />}>
           <Route index element={<Admin />} />

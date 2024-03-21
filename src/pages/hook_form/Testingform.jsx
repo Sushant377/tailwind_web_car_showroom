@@ -7,11 +7,9 @@ export default function Testingform() {
   const [prismaData, setPrismaData] = useState([]);
   const [error, setError] = useState(null); // State to store error messages
   const [updateMessage, setUpdateMessage] = useState(""); // State to store update message
-  const { register, handleSubmit, setValue, watch , formState:{errors} } = useForm(); // useForm hook
+  const { register, handleSubmit, setValue , formState:{errors} } = useForm(); // useForm hook
   const [isUpdate, setIsUpdate] = useState(false);
   const [updateId, setUpdateId] = useState(null);
-
-
 
   // Function to fetch data from backend
   async function prismafn() {
@@ -34,7 +32,7 @@ export default function Testingform() {
       await axios.delete(`http://localhost:5002/prisma/${userId}`);
       prismafn(); // Refresh data after deletion
       setError(null); // Clear error state
-      handleUpdate(); 
+      setUpdateMessage("User deleted successfully."); // Set update message
     } catch (err) {
       console.log(err.response.data);
       setError(err.message);
@@ -50,32 +48,7 @@ export default function Testingform() {
     setValue("email", data.email); // Fill the form with selected user's email
   };
 
-  // // Function to handle user update
-  // const handleUpdate = async () => {
-  //   try {
-  //     const id = watch("id"); // Get the user ID from the form
-  //     const response = await axios.put(
-  //       `http://localhost:5002/prisma/update/${id}`,
-  //       {
-  //         name: watch("name"),
-  //         email: watch("email"),
-  //       }
-  //     );
-
-  //     if (response && response.data) {
-  //       prismafn(); // Refresh data after update
-  //       setError(null); // Clear error state
-  //       setUpdateMessage("Data updated successfully."); // Set update message
-  //     } else {
-  //       setError("Failed to update data."); // Set error message
-  //     }
-  //   } catch (err) {
-  //     console.log(err.response.data);
-  //     setError(err.response.data); // Set error message returned by backend
-  //   }
-  // };
-
-  // Form  post submission handler
+  // Form post submission handler
   const onSubmit = async (data) => {
     try {
       await axios.post("http://localhost:5002/prisma", {
@@ -83,34 +56,38 @@ export default function Testingform() {
         email: data.email,
       });
       prismafn();
+      setUpdateMessage("Data updated successfully.");
       setError(null); // Clear error state
     } catch (err) {
       console.log(err.response.data);
       setError(err.response.data); // Set error message returned by backend
     }
   };
-//new fn method for update button
-async function updateSubmission(data) {
-  console.log("update: ", data);
-  try {
-    const res = await axios({
-      method: "PUT",
-      url: `http://localhost:5002/prisma/update/${updateId}`,
-      data: { name: data.name, email: data.email },
-    });
-    prismafn();
-    console.log(res.data);
-  } catch (err) {
-    console.log(err);
+
+  // Function to handle user update
+  async function updateSubmission(data) {
+    console.log("update: ", data);
+    try {
+      const res = await axios({
+        method: "PUT",
+        url: `http://localhost:5002/prisma/update/${updateId}`,
+        data: { name: data.name, email: data.email },
+      });
+      prismafn();
+      setUpdateMessage("Data updated successfully.");
+      console.log(res.data)
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+    }
   }
-}
 
   return (
     <div className="flex items-center">
       <div>
         <form
           className="flex flex-col bg-lime-400"
-          onSubmit={handleSubmit(isUpdate ? updateSubmission: onSubmit)}
+          onSubmit={handleSubmit(isUpdate ? updateSubmission : onSubmit)}
         >
           <input
             type="text"
@@ -133,27 +110,28 @@ async function updateSubmission(data) {
             {...register("email", { required: true })}
           />
           <div className="flex mt-2">
-      {!isUpdate ? (<button type="submit"
-          className="bg-green-600 text-white px-3 py-1 rounded ml-2"
-        >
-              Submit      
-      </button>) :
-          
-        (<button
-          className="bg-yellow-600 text-white px-3 py-1 rounded ml-2"
-          onClick={updateSubmission}
-        >
-          Update
-        </button>)}
-            {/* Update button */}
+            {!isUpdate ? (
+              <button
+                type="submit"
+                className="bg-green-600 text-white px-3 py-1 rounded ml-2"
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                className="bg-yellow-600 text-white px-3 py-1 rounded ml-2"
+                onClick={handleSubmit(updateSubmission)}
+              >
+                Update
+              </button>
+            )}
           </div>
-          {error && <p className="text-red-600">{error.message || error}</p>}{" "}
+          {error && <p className="text-red-600">{error}</p>}{" "}
           {/* Display error message if error exists */}
           {updateMessage && (
             <p className="text-green-600">{updateMessage}</p>
           )}
           {/* Display update message if exists */}
-          
         </form>
       </div>
 
@@ -163,7 +141,7 @@ async function updateSubmission(data) {
           <table className="border-collapse bg-slate-300 w-1/2">
             <thead>
               <tr>
-                <th className="p-2 bg-slate-500 border border-black ">id</th>
+                <th className="p-2 bg-slate-500 border border-black">id</th>
                 <th className="p-2 bg-slate-500 border border-black">Name</th>
                 <th className="p-2 bg-slate-500 border border-black">Email</th>
                 <th className="p-2 bg-slate-500 border border-black">

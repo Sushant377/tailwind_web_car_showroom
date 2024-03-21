@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 
 function Popularity() {
   return (
@@ -32,7 +33,8 @@ function Popularity() {
       </div>
     </div>
     <div className="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
-      <img
+      <motion.img
+        whileHover={{scale:1.2}}
         className="object-cover object-center w-full h-full"
         src="/ferrari.jpg"
         alt="stats"
