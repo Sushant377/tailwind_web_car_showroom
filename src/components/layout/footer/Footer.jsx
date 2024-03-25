@@ -1,12 +1,20 @@
-import { useContext } from "react";
-import GlobalContext from "../../../GlobalContext";
+// import { useContext } from "react";
+// import GlobalContext from "../../../GlobalContext";
+import useTheme from "../../../store/useTheme";
 
 function Footer() {
-  const contextVlues =useContext(GlobalContext);
-  const {theme} = contextVlues;
-  const {backgroundColor , color} = theme;
+
+  //using zustand for footer
+  // theming using zustand
+  const {z_color,z_bgColor } = useTheme();
+  console.log(z_color,z_bgColor);
+
+  //using gontext theming for fpooter
+  // const contextVlues =useContext(GlobalContext);
+  // const {theme} = contextVlues;
+  // const {backgroundColor , color} = theme;
   return (
-    <div style={{color:color, backgroundColor:backgroundColor}}  >
+    <div style={{color:z_color, backgroundColor:z_bgColor}}  >
         <footer >
   <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
     <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">

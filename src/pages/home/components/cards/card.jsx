@@ -2,10 +2,10 @@ import{motion} from "framer-motion";
 function Card() {
   return (
     <motion.div
-    initial={{x:'100vw'}}
-    animate={{x:0}}
-    transition={{duration:3}}
-    whileHover={{scale:1.05}}
+    // initial={{x:'100vw'}}
+    // animate={{x:0}}
+    // transition={{duration:3}}
+    // whileHover={{scale:1.05}}
 >
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">

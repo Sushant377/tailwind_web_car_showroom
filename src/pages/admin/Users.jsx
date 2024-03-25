@@ -1,4 +1,4 @@
-import SignedinTableData from "../sign-in/SignedUserData"
+import SignedinTableData from "../sign-in/components/SignedinTableData"
 
 function Users() {
   return (

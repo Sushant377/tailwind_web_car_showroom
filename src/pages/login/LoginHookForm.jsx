@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 function LoginHook() {
+
     const cookie = Cookies.get("token");
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();

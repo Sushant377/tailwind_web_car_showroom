@@ -17,7 +17,7 @@ console.log(contextValues)
 
         <div>
           <h2>Cenematic shot</h2>
-            <iframe src="/mer.webm" width="750" height="415"  allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe src="/mer.webm" width="750" height="415"  allow="autoplay; fullscreen" ></iframe>
        </div>
     </div>
   )

@@ -18,7 +18,7 @@ import { useState } from "react";
 import Hookform from "./pages/hook_form/Hookform";
 import Example from "./components/material_react_table/Reacttable";
 import LoginHook from "./pages/login/LoginHookForm";
-import Signinhook from "./pages/sign-in/signinhook";
+// import Signinhook from "./pages/sign-in/Signinhook";
 import Signin from "./pages/sign-in/Sign-in";
 function App() {
   const [theme, setTheme]= useState({
@@ -51,7 +51,7 @@ function App() {
         <Route path="/loginhook" element={<LoginHook />} />
 
 
-        <Route path="/signinhook" element={<Signinhook />} />
+        {/* <Route path="/signinhook" element={<Signinhook />} /> */}
         <Route path="/sign-in" element={<Signin />} />
 
 
