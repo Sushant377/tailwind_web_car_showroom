@@ -13,22 +13,25 @@ import Users from "./pages/admin/Users";
 import Products from "./pages/admin/Products";
 import Dynamic from "./pages/dynamic/Dynamic";
 import Bmw from "./pages/garage/garage_sidenav/Bmw";
-import GlobalContext from "./GlobalContext";
-import { useState } from "react";
+// import GlobalContext from "./GlobalContext";
+// import { useState } from "react";  
 import Hookform from "./pages/hook_form/Hookform";
 import Example from "./components/material_react_table/Reacttable";
 import LoginHook from "./pages/login/LoginHookForm";
-// import Signinhook from "./pages/sign-in/Signinhook";
+import Signinhook from "./pages/sign-in/Signinhook";
 import Signin from "./pages/sign-in/Sign-in";
+import useTheme from "./store/useTheme";
 function App() {
-  const [theme, setTheme]= useState({
-    backgroundColor:"#b37ec8",
-    color: "black"
-  })
+  //for context theming
+  // const [theme, setTheme]= useState({
+  //   backgroundColor:"#b37ec8",
+  //   color: "black"
+  // })
+  const {theme}= useTheme();
 
   return (
-    <> 
-    <GlobalContext.Provider value={{theme, setTheme}}>
+    <div  style={{ backgroundColor:theme.primaryColor}} >
+    {/* <GlobalContext.Provider value={{theme, setTheme}}> */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -51,7 +54,7 @@ function App() {
         <Route path="/loginhook" element={<LoginHook />} />
 
 
-        {/* <Route path="/signinhook" element={<Signinhook />} /> */}
+        <Route path="/signinhook" element={<Signinhook />} />
         <Route path="/sign-in" element={<Signin />} />
 
 
@@ -65,8 +68,8 @@ function App() {
         <Route path="/table" element={<Example />} />
 
       </Routes>
-      </GlobalContext.Provider>
-    </>
+      {/* </GlobalContext.Provider> */}
+    </div>
   );
 }
 

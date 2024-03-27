@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 export default function SignedinTableData(props) {
-  console.log(props.signformData);
   return (
     <div className="mb-9">
       {/* Display prisma data */}

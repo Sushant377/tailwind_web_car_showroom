@@ -7,9 +7,8 @@ import useTheme from "../../store/useTheme";
 
 function Navbar() {
   // theming using zustand
-  const {z_color,z_bgColor , setColor,setDefault} = useTheme();
-  console.log(z_color,z_bgColor);
-
+  const {theme,setTheme,setDefault} = useTheme();
+console.log(theme)
 // //themeing using context 
 //   const contextVlues = useContext(GlobalContext);
 //   const { theme, setTheme } = contextVlues;
@@ -19,10 +18,10 @@ function Navbar() {
 function zustandTheme(e) {
   const value = e.target.value;
 
-  if (value === "z_light") {
-    setColor("black","yellow");
-  } else if (value === "z_dark") {
-    setColor("blue","black");
+  if (value === "light") {
+  setTheme({color:"black",bgColor:"yellow", primaryColor:"#F5DD61"});
+  } else if (value === "dark") {
+    setTheme({color:"blue",bgColor:"black", primaryColor:"#7469B6"});
 
   } else {
    setDefault();
@@ -43,7 +42,7 @@ function zustandTheme(e) {
   // }
   return (
     <header
-      style={{ color: z_color, backgroundColor: z_bgColor }}
+      style={{ color: theme.color, backgroundColor: theme.bgColor }}
       className="text-gray-1200 shadow-xl body-font bg-slate-400"
     >
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -57,10 +56,11 @@ function zustandTheme(e) {
               textShadow: "0px 0px 8px rgb(255,255,255)",
               scale: [
                 1.2, 1, 1.1, 1, 1.2, 1, 1.2, 1, 1.1, 1, 1.2, 1, 1.2, 1, 1.1, 1,
-                1.2, 1, 1.2, 1.1, 1, 1.2, 1, 1.2, 1, 1.1, 1, 1.2, 1, 1.2, 1.1,
-                1, 1.2, 1, 1.2, 1, 1.1, 1, 1.2, 1, 1.2,
+                1.2, 
               ],
             }}
+            style={{ color: theme.color }}
+
           >
             SuperCars Nepal
           </motion.span>
@@ -91,13 +91,17 @@ function zustandTheme(e) {
           {
             //for zustand theme
           }
-           <select style={{color:z_color, backgroundColor:z_bgColor}} onChange={zustandTheme}         
+           <select 
+             className="block appearance-none border-gray-200 text-black py-2 px-4 rounded-2xl leading-tight  focus:bg-white focus:border-gray-500"
+
+           style={{color:theme.color, backgroundColor:theme.bgColor}} onChange={zustandTheme}         
  >
-               <option  value="">Zustand_Theme</option>
-                <option  value="z_light"> ZUS Light</option>
-                <option  value="z_dark"> ZUS Night</option>
+               <option  value="">Def.Theme</option>
+                <option  value="light">Light</option>
+                <option  value="dark">Night</option>
           
             </select>
+
 {/* 
           {
             //for global contect theming
@@ -119,6 +123,28 @@ function zustandTheme(e) {
               <option value="dark">Night</option>
             </select>
           </label> */}
+
+              {/* {adding toogle button for dark and light mode } */}
+              <label className="inline-flex items-center me-5 cursor-pointer">
+  <input
+    onChange={zustandTheme}
+    value="light"
+    type="checkbox"
+    defaultValue=""
+    className="sr-only peer"
+    defaultChecked=""
+    
+  />
+  <span   className="absolute left-0.5 top-0.5 transform -translate-x-1/2 -translate-y-1/2 text-xs font-medium text-gray-900 dark:text-gray-300"
+  >  </span>
+  <div className="  relative w-11 h-6 bg-gray-600 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-600" />
+  <span className="absolute right-0.5 top-0.5 transform translate-x-1/2 -translate-y-1/2 text-xs font-medium text-gray-900 dark:text-gray-300">
+    
+  </span>
+</label>
+
+
+      
 
 
         </motion.nav>

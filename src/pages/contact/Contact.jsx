@@ -1,13 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
-import useTheme from '../../store/useTheme';
 
 
 function Contact() {
-  const {z_color,z_bgColor, setColor,setDefault} = useTheme();
-  console.log(z_color,z_bgColor);
 
-  
 
 const [email , setEmail] = useState("");
 const [message , setMessage] = useState("");
@@ -37,14 +33,7 @@ const [successmsg, setSuccessmsg] = useState("");
  
 }}
   return (
-    <div  style={{color:z_color, backgroundColor:z_bgColor}} >
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque nam ex facilis. Quasi soluta deleniti recusandae illo voluptate eius quisquam, sequi et tempora numquam exercitationem eaque necessitatibus. Quam, harum neque!</p>
-      
-      <button onClick ={()=> setColor("blue","black")}> change clr </button>
-      <br />
-      <button onClick={setDefault}> default clr </button>
-
-
+    <div >
       <form onSubmit={submit}>
         <section className="text-gray-600 body-font relative">
   <div className="absolute inset-0 bg-gray-300">
@@ -100,7 +89,6 @@ const [successmsg, setSuccessmsg] = useState("");
     </div>
   </div>
 </section>
-
 </form></div>
   )
 }

@@ -10,7 +10,7 @@ function Pricelist() {
           <img
             alt="ecommerce"
             className="object-cover object-center w-full h-full block"
-            src="/ferrari.jpg"
+            src="/1.jpg"
           />
         </a>
         <div className="mt-4">
@@ -64,7 +64,7 @@ function Pricelist() {
           <img
             alt="ecommerce"
             className="object-cover object-center w-full h-full block"
-            src="/ferrari.jpg"
+            src="/1.jpg"
           />
         </a>
         <div className="mt-4">
@@ -100,7 +100,7 @@ function Pricelist() {
           <img
             alt="ecommerce"
             className="object-cover object-center w-full h-full block"
-            src="/ferrari.jpg"
+            src="/1.jpg"
           />
         </a>
         <div className="mt-4">
